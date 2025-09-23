@@ -14,8 +14,10 @@ spec:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: frontend
-          image: registry.example.com/kukuk/frontend:latest
+          image: docker.io/andziallas/kukuk-frontend:latest
           ports:
             - containerPort: 80

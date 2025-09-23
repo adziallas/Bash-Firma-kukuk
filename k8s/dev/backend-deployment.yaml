@@ -14,9 +14,11 @@ spec:
       labels:
         app: backend
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: backend
-          image: registry.example.com/kukuk/backend:latest
+          image: docker.io/andziallas/backend-kukuk:latest
           ports:
             - containerPort: 8080
           env:
