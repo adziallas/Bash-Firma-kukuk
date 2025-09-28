@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-echo "🔧 Starte Installation unter WSL..."
+echo " Starte Installation unter WSL..."
 
 # === Prüfen ob WSL aktiv ist ===
 if grep -qi microsoft /proc/version; then
@@ -72,4 +72,4 @@ for dep in "${DEPENDENCIES[@]}"; do
   fi
 done
 
-echo "✅ Alle Programme sind unter WSL installiert oder aktualisiert."
+echo "Alle Programme sind unter WSL installiert oder aktualisiert."
