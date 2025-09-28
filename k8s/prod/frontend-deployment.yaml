@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: prod
   labels:
     app: frontend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -14,8 +15,10 @@ spec:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: frontend
-          image: registry.example.com/kukuk/frontend:latest
+          image: docker.io/andziallas/kukuk-frontend:latest
           ports:
             - containerPort: 80
