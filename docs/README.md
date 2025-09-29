@@ -1,8 +1,10 @@
 
 **ANMERKUNG***
-zu diesem Repo gehört noch ein automatisiertes bash-skript das alle benötigten Programme unter wsl installiert.
+1. zu diesem Repo gehört noch ein automatisiertes bash-skript das alle benötigten Programme unter wsl installiert.
 nach Projektabschluss wird die datei seperat hochgeladen.! 
-____________________________________________________________________________________________________________
+___________________________________________________________________________________________________________
+
+2. Die Jenkins-Pipelines wurde über https://localhost:9090 gestartet und getestet, da die bereitgestellte Jenkinsseite nicht verfügbar war. 
 
 # Abschlussprojekt – DevOps Engineering bei Kukuk Technology Future GmbH
 
