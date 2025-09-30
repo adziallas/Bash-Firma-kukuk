@@ -1,7 +1,7 @@
 
 **ANMERKUNG***
 1. zu diesem Repo gehört noch ein automatisiertes bash-skript das alle benötigten Programme unter wsl installiert.
-nach Projektabschluss wird die datei seperat hochgeladen.! 
+
 ___________________________________________________________________________________________________________
 
 2. Ich habe die Jenkins-Pipeline nur local getestet über den http://localhost:9090
