@@ -4,7 +4,10 @@
 nach Projektabschluss wird die datei seperat hochgeladen.! 
 ___________________________________________________________________________________________________________
 
-2. Die Jenkins-Pipelines wurde über https://localhost:9090 gestartet und getestet, da die bereitgestellte Jenkinsseite nicht verfügbar war. 
+2. Ich habe die Jenkins-Pipeline nur local getestet über den http://localhost:9090
+   Da keiner local auf die seite von mir kommt in Jenkins habe ich dafür ein screenshot angehängt.
+   <img width="1458" height="743" alt="image" src="https://github.com/user-attachments/assets/7a72cdbb-8870-4148-92ed-ceb4f739e2d1" />
+
 
 # Abschlussprojekt – DevOps Engineering bei Kukuk Technology Future GmbH
 
