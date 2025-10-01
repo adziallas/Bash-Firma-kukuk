@@ -2,14 +2,11 @@
 FROM node:14 AS build
 WORKDIR /app
 
-# Kopiere nur relevante Dateien
-COPY index.html main.js ./
+# Kopiere das gesamte Frontend-Projekt
+COPY frontend/ ./
 
-# Optional: Minifizierung oder andere Build-Schritte
-# Beispiel: Kopiere Dateien in ein dist-Verzeichnis
-RUN mkdir dist && \
-    cp index.html dist/index.html && \
-    cp main.js dist/main.js
+# Installiere Abhängigkeiten und baue das Projekt
+RUN npm install && npm run build
 
 # Bereitstellung über Nginx
 FROM nginx:alpine

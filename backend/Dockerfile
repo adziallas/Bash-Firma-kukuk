@@ -1,11 +1,11 @@
-# Basis-Image mit Java 17
+# Basis-Image mit Java 17 Runtime
 FROM eclipse-temurin:17-jre
 
 # Arbeitsverzeichnis im Container
 WORKDIR /app
 
-# Kopiere das JAR ins Container-Dateisystem
-COPY target/backend-1.0.0.jar app.jar
+# Kopiere das JAR ins Container-Dateisystem (dynamisch)
+COPY target/*.jar app.jar
 
 # Exponiere den Port (optional, für Dokumentation)
 EXPOSE 8080
