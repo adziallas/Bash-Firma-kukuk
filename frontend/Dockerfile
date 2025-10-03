@@ -1,20 +1,12 @@
-# Build-Phase: React mit Node.js
-FROM node:18 AS build
+# Build-Phase mit Node.js
+FROM node:14 AS build
 WORKDIR /app
-
-COPY package.json package-lock.json ./
-RUN npm ci
-
-COPY . ./
-RUN npm run build
+COPY index.html main.js ./
+RUN mkdir dist && \
+    cp index.html dist/index.html && \
+    cp main.js dist/main.js
 
 # Bereitstellung über Nginx
 FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
-
-RUN rm -rf ./*
-
-# Korrigierter Pfad: React erzeugt /app/build
-COPY --from=build /app/build/ ./
-
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
