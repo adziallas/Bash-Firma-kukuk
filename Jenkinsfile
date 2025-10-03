@@ -10,13 +10,13 @@ pipeline {
     stages {
         stage('Build Backend') {
             steps {
-                bat 'cd backend && mvn clean package -Pprod -DskipTests'
+                sh 'cd backend && mvn clean package -Pprod -DskipTests'
             }
         }
 
         stage('Prepare Frontend') {
             steps {
-                bat 'echo Statischer Frontend-Build – kein npm nötig'
+                sh 'echo "Statischer Frontend-Build – kein npm nötig"'
             }
         }
 
@@ -25,11 +25,13 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerlogin',
                                                  usernameVariable: 'DOCKER_USER',
                                                  passwordVariable: 'DOCKER_PASS')]) {
-                    bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-                    bat "docker build -t %BACKEND_IMAGE%:latest backend"
-                    bat "docker build -t %FRONTEND_IMAGE%:latest frontend"
-                    bat "docker push %BACKEND_IMAGE%:latest"
-                    bat "docker push %FRONTEND_IMAGE%:latest"
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker build -t $BACKEND_IMAGE:latest backend
+                        docker build -t $FRONTEND_IMAGE:latest frontend
+                        docker push $BACKEND_IMAGE:latest
+                        docker push $FRONTEND_IMAGE:latest
+                    '''
                 }
             }
         }
@@ -38,7 +40,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig-creds',
                                       variable: 'KUBECONFIG')]) {
-                    bat 'kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/dev/'
+                    sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s/dev/'
                 }
             }
         }
@@ -50,7 +52,7 @@ pipeline {
                         input message: 'Prod deploy freigeben?', ok: 'Ja'
                         withCredentials([file(credentialsId: 'kubeconfig-creds',
                                               variable: 'KUBECONFIG')]) {
-                            bat 'kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/prod/'
+                            sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s/prod/'
                         }
                     } catch (err) {
                         echo "Prod-Deploy übersprungen: ${err}"
@@ -61,7 +63,7 @@ pipeline {
 
         stage('Smoke-Test Backend') {
             steps {
-                bat 'curl -s http://localhost:8080/ | findstr "Willkommen bei Bash-Firma Kukuk"'
+                sh 'curl -s http://localhost:8080/ | grep "Willkommen bei Bash-Firma Kukuk"'
             }
         }
     }
