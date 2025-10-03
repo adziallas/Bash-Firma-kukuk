@@ -2,7 +2,7 @@
 
 Stabile, reproduzierbare Demo-Umgebung für Spring Boot + statisches Frontend.
 
-## 🔧 Komponenten
+## Komponenten
 
 - **Backend**: Spring Boot, REST API, Profile `dev` und `prod`
 - **Frontend**: Statisches HTML/JS, ausgeliefert via Nginx
@@ -10,7 +10,7 @@ Stabile, reproduzierbare Demo-Umgebung für Spring Boot + statisches Frontend.
 - **Docker**: Multi-Stage Builds für schlanke Images
 - **Kubernetes**: Deployments für `dev` und `prod` mit Namespace-Isolation
 
-## 🚀 Starten
+## Starten
 
 ```bash
 # Backend lokal bauen
@@ -31,9 +31,10 @@ leanup
 bash
 ./cleanup-kukuk.sh
 # Entfernt .trunk/, node_modules/, target/
-🔐 Zugang für Demos
+Zugang für Demos
 Pinggy.io
 
 Zugangsdaten manuell verwaltet, keine CI-Weitergabe
+
 
 
