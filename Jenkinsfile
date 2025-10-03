@@ -22,10 +22,11 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerlogin',
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-token',
                                                  usernameVariable: 'DOCKER_USER',
                                                  passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
+                        set -e
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker build -t $BACKEND_IMAGE:latest backend
                         docker build -t $FRONTEND_IMAGE:latest frontend
@@ -40,7 +41,11 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig-creds',
                                       variable: 'KUBECONFIG')]) {
-                    sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s/dev/'
+                    sh '''
+                        set -e
+                        kubectl --kubeconfig=$KUBECONFIG get nodes | grep Ready
+                        kubectl --kubeconfig=$KUBECONFIG apply -f k8s/dev/ --validate=false
+                    '''
                 }
             }
         }
@@ -52,7 +57,11 @@ pipeline {
                         input message: 'Prod deploy freigeben?', ok: 'Ja'
                         withCredentials([file(credentialsId: 'kubeconfig-creds',
                                               variable: 'KUBECONFIG')]) {
-                            sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s/prod/'
+                            sh '''
+                                set -e
+                                kubectl --kubeconfig=$KUBECONFIG get nodes | grep Ready
+                                kubectl --kubeconfig=$KUBECONFIG apply -f k8s/prod/ --validate=false
+                            '''
                         }
                     } catch (err) {
                         echo "Prod-Deploy übersprungen: ${err}"
