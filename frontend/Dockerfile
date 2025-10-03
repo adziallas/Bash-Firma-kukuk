@@ -1,14 +1,20 @@
-# Build-Phase mit Node.js
-FROM node:14 AS build
+# Build-Phase: React mit Node.js
+FROM node:18 AS build
 WORKDIR /app
 
-# Kopiere das gesamte Frontend-Projekt
-COPY . ./
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Installiere Abhängigkeiten und baue das Projekt
-RUN npm install && npm run build
+COPY . ./
+RUN npm run build
 
 # Bereitstellung über Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+
+RUN rm -rf ./*
+
+# Korrigierter Pfad: React erzeugt /app/build
+COPY --from=build /app/build/ ./
+
 EXPOSE 80

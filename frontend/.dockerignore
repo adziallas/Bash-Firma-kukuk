@@ -1,7 +1,5 @@
-node_modules/
-dist/
-*.md
+node_modules
+build
+.git
 *.log
-.git/
-.gitignore
 Dockerfile
