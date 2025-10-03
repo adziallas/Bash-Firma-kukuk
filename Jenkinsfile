@@ -1,4 +1,4 @@
- pipeline {
+pipeline {
     agent any
     environment {
         REGISTRY       = "docker.io/andziallas"
@@ -8,13 +8,12 @@
     stages {
         stage('Build Backend') {
             steps {
-                bat 'cd backend && mvn clean package -Pdev -DskipTests'
+                bat 'cd backend && mvn clean package -Pprod -DskipTests'
             }
         }
-        stage('Build Frontend') {
+        stage('Prepare Frontend') {
             steps {
-                bat 'cd frontend && npm install'
-                bat 'cd frontend && npm run build'
+                bat 'echo "Statischer Frontend-Build wird verwendet – kein npm nötig"'
             }
         }
         stage('Docker Build & Push') {
@@ -56,4 +55,4 @@
             }
         }
     }
- }
+}
