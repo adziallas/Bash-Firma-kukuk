@@ -3,7 +3,7 @@ FROM node:14 AS build
 WORKDIR /app
 
 # Kopiere das gesamte Frontend-Projekt
-COPY frontend/ ./
+COPY . ./
 
 # Installiere Abhängigkeiten und baue das Projekt
 RUN npm install && npm run build
