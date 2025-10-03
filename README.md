@@ -10,9 +10,13 @@ Für Live-Demos empfiehlt sich ein Clean Start mit den obigen Befehlen.
 
 
 **ANMERKUNG**  
-1. Zu diesem Repo gehört ein automatisiertes Bash-Skript [`programme-installation-firma-kukuk.sh`](../programme-installation-firma-kukuk.sh), das alle benötigten Programme unter WSL installiert.
+1. Zu diesem Repo gehört ein automatisiertes Bash-Skript was im Ordner unten angehangen.
+   # Dateiname: programme-installation-firma-kukuk.sh
+   # Freigabe ggf. mit
+   "mit chmod +x programme-installation-firma-kukuk.sh" freigeben" 
+   das alle benötigten Programme wird installiert
 
-2. Ich habe die Jenkins-Pipeline nur lokal getestet unter `http://localhost:9090`.  
+3. Ich habe die Jenkins-Pipeline nur lokal getestet unter `http://localhost:9090`.  
    Da kein externer Zugriff möglich ist, habe ich einen Screenshot angehängt:
 
 ![Jenkins Screenshot](https://github.com/user-attachments/assets/7a72cdbb-8870-4148-92ed-ceb4f739e2d1)
