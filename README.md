@@ -32,7 +32,8 @@ bash
 ./cleanup-kukuk.sh
 # Entfernt .trunk/, node_modules/, target/
 🔐 Zugang für Demos
-Tunneling via ngrok, Pinggy.io oder Cloudflare Tunnel
+Pinggy.io
 
 Zugangsdaten manuell verwaltet, keine CI-Weitergabe
+
 
