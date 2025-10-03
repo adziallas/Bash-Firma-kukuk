@@ -88,7 +88,10 @@ pipeline {
             steps {
                 sh '''
                     set -e
-                    curl -s http://localhost:8080/index.html | grep "Willkommen bei Bash-Firma Kukuk"
+                    if ! curl -s http://localhost:8080/index.html | grep -q "Willkommen bei Bash-Firma Kukuk"; then
+                        echo "❌ Smoke-Test fehlgeschlagen: Text nicht gefunden"
+                        exit 1
+                    fi
                 '''
             }
         }
