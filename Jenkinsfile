@@ -8,15 +8,29 @@ pipeline {
     }
 
     stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build Backend') {
             steps {
-                sh 'cd backend && mvn clean package -Pprod -DskipTests'
+                sh '''
+                    set -e
+                    cd backend
+                    mvn clean package -Pprod -DskipTests
+                '''
             }
         }
 
         stage('Prepare Frontend') {
             steps {
-                sh 'echo "Statischer Frontend-Build – kein npm nötig"'
+                sh '''
+                    set -e
+                    echo "Statisches Frontend – keine Build-Schritte nötig"
+                    ls -la frontend
+                '''
             }
         }
 
@@ -72,7 +86,10 @@ pipeline {
 
         stage('Smoke-Test Backend') {
             steps {
-                sh 'curl -s http://localhost:8080/ | grep "Willkommen bei Bash-Firma Kukuk"'
+                sh '''
+                    set -e
+                    curl -s http://localhost:8080/index.html | grep "Willkommen bei Bash-Firma Kukuk"
+                '''
             }
         }
     }

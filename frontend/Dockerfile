@@ -1,12 +1,13 @@
-# Build-Phase mit Node.js
-FROM node:14 AS build
-WORKDIR /app
-COPY index.html main.js ./
-RUN mkdir dist && \
-    cp index.html dist/index.html && \
-    cp main.js dist/main.js
-
-# Bereitstellung über Nginx
+# Basis-Image: schlanker Webserver
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+
+# Entferne Standard-Nginx-Inhalte
+RUN rm -rf /usr/share/nginx/html/*
+
+# Kopiere statische Dateien ins Webverzeichnis
+COPY . /usr/share/nginx/html
+
+# Exponiere Port 80
 EXPOSE 80
+
+# Starte Nginx (Standard-Eintragspunkt bleibt erhalten)
