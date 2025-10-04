@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukuk-backend
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kukuk-backend
+  template:
+    metadata:
+      labels:
+        app: kukuk-backend
+    spec:
+      containers:
+        - name: backend
+          image: docker.io/andziallas/backend-kukuk:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev

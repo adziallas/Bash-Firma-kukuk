@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kukuk-frontend
+  name: kukuk-backend
   namespace: prod
 spec:
   selector:
-    app: kukuk-frontend
+    app: kukuk-backend
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
   type: ClusterIP

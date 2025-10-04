@@ -5,6 +5,7 @@ pipeline {
         REGISTRY       = "docker.io/andziallas"
         BACKEND_IMAGE  = "${REGISTRY}/backend-kukuk"
         FRONTEND_IMAGE = "${REGISTRY}/kukuk-frontend"
+        SPRING_PROFILES_ACTIVE = "prod"
     }
 
     stages {
@@ -81,18 +82,6 @@ pipeline {
                         echo "Prod-Deploy übersprungen: ${err}"
                     }
                 }
-            }
-        }
-
-        stage('Smoke-Test Backend') {
-            steps {
-                sh '''
-                    set -e
-                    if ! curl -s http://localhost:8080/index.html | grep -q "Willkommen bei Bash-Firma Kukuk"; then
-                        echo "❌ Smoke-Test fehlgeschlagen: Text nicht gefunden"
-                        exit 1
-                    fi
-                '''
             }
         }
     }

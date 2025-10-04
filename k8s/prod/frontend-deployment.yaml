@@ -1,22 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: kukuk-frontend
   namespace: prod
-  labels:
-    app: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: kukuk-frontend
   template:
     metadata:
       labels:
-        app: frontend
+        app: kukuk-frontend
     spec:
-      imagePullSecrets:
-        - name: regcred
       containers:
         - name: frontend
           image: docker.io/andziallas/kukuk-frontend:latest
