@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kukuk-backend
-  namespace: dev
+  namespace: prod
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kukuk-backend
@@ -15,9 +15,22 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/andziallas/backend-kukuk:latest
+          image: docker.io/andziallas/backend-kukuk:prod
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: dev
+              value: "prod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukuk-backend
+  namespace: prod
+spec:
+  selector:
+    app: kukuk-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP
